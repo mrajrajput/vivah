@@ -16,9 +16,9 @@ import java.util.Calendar;
 public class Profile {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pkProfileId", nullable = false)
-    public Integer pkProfileId;
+    public int pkProfileId;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="fkPersonId")
