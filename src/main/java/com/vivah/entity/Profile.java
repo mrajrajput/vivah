@@ -3,7 +3,6 @@ package com.vivah.entity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.id.IdentityGenerator;
 
 import javax.persistence.*;
 import java.util.Calendar;
@@ -12,7 +11,7 @@ import java.util.Calendar;
 @Table(name = "Profile")
 @Getter
 @Setter
-@ToString
+//@ToString
 public class Profile {
 
     @Id
@@ -24,33 +23,34 @@ public class Profile {
     @JoinColumn(name="fkPersonId")
     private Person person; // 1 person to 1 Profile.
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="fkAddressId")
+    private Address address; // 1 Person has 1 Address
+
     @Column(name = "isBride", nullable = false)
     public boolean isBride;
 
-    @Column(name = "preference", nullable = true)
+    @Column(name = "preference")
     public String preference;
 
     @Column(name = "mobileNumber", nullable = false)
     public String mobileNumber;
 
-    @Column(name = "bloodGroup", nullable = true)
+    @Column(name = "bloodGroup")
     public String bloodGroup;
 
-    @Column(name = "historyOfDisease", nullable = true)
+    @Column(name = "historyOfDisease")
     public String historyOfDisease;
 
     /*  if Divorced - start  */
-    @Column(name="isDivorcee", nullable = true)
+    @Column(name="isDivorcee")
     public boolean isDivorcee;
 
-    @Column(name="divorcedDate", nullable = true)
+    @Column(name="divorcedDate")
     public Calendar divorcedDate;
 
-    @Column(name="marriageDate", nullable = true)
+    @Column(name="marriageDate")
     public Calendar marriageDate;
     /*  if Divorced - end  */
-
-
-
 
 }

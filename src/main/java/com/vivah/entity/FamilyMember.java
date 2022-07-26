@@ -14,20 +14,24 @@ import javax.persistence.*;
 public class FamilyMember {
 
     @Id
-    @GeneratedValue
-    @Column(name = "pkFamilyMemberId", nullable = false, unique = true)
-    private Long pkFamilyMemberId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "pkFamilyMemberId", nullable = false)
+    private int pkFamilyMemberId;
 
-    @Column(name = "type", nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fkPersonId")
+    public Person person;
+
+    @Column(name = "type", nullable = true)
     public String type; //Father, mother, sister, brother.
 
-    @Column(name="fullName", nullable = false)
+    @Column(name="fullName", nullable = true)
     public String fullName;
 
-    @Column(name="gotra", nullable = false)
+    @Column(name="gotra", nullable = true)
     public String gotra;
 
-    @Column(name="village", nullable = false)
+    @Column(name="village", nullable = true)
     public String village;
 
     @Column(name="isMarried", nullable = true)

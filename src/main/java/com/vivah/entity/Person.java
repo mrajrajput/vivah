@@ -5,6 +5,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -17,13 +19,15 @@ public class Person {
     @Column(name = "pkPersonId", nullable = false)
     private int pkPersonId;
 
-    @OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "person")//, cascade = CascadeType.ALL)
     public Profile profile; // 1 person has 1 profile.
 
-//    @Column(name = "fkFamilyMemberId", nullable = false)
-//    private FamilyMember fkFamilyMemberId; // 1 person to Many FamilyMember
-//    @Column(name = "fkAddressId", nullable = false)
-//    private Address fkAddressId; // 1 Person has 1 Address
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    public Set<FamilyMember> familyMembers; // 1 person to Many FamilyMember
+
+    public Person(){
+        familyMembers = new HashSet<>();
+    }
 
     @Column(name="firstName")
     public String firstName;

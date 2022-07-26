@@ -14,9 +14,13 @@ import javax.persistence.*;
 public class Address {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pkAddressId", nullable = false, unique = true)
     public int pkAddressId;
+
+//    @OneToOne(mappedBy = "address", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "address")
+    private Profile profile; // 1 person to 1 Address.
 
     @Column(name = "address1", nullable = false)
     public String address1;
